@@ -98,3 +98,13 @@ SELECT
     stock.is_available,
     stock.updated_at
 FROM local.article_stock stock;
+
+-- =========================================================
+-- changeset miguel:005_article_add_category
+-- Purpose: add category to article
+-- =========================================================
+ALTER TABLE local.article
+    ADD COLUMN IF NOT EXISTS category varchar(255);
+
+CREATE INDEX IF NOT EXISTS index_article_category
+    ON local.article (category);
