@@ -6,9 +6,10 @@ spring:
     change-log: classpath:/db/changelog/db.changelog-master.sql
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: validate
     show_sql: true
     properties:
+      hibernate.jdbc.time_zone: UTC
       hibernate:
         format_sql: true
         default_schema: local
