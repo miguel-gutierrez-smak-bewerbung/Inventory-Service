@@ -9,15 +9,6 @@ topics:
   product:
     upsert: inventory.product.upsert.v1
     delete: inventory.product.delete.v1
-  inventory:
-    assigned: ims.inventory.assigned.v1
-    adjusted: ims.inventory.adjusted.v1
-    reserved: ims.inventory.reserved.v1
-    rejected: ims.inventory.rejected.v1
-    released: ims.inventory.released.v1
-    received: ims.inventory.received.v1
-  retryFail:
-    adjusted: ims.inventory.adjusted.v1.retry-fail
-    reserved: ims.inventory.reserved.v1.retry-fail
-    released: ims.inventory.released.v1.retry-fail
-    received: ims.inventory.received.v1.retry-fail
+    products-snapshot: inventory.product-snapshot.v1
+    fail: inventory.product-snapshot.v1.fail
+    retryFail: inventory.product-snapshot.v1.retry-fail

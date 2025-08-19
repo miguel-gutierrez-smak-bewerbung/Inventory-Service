@@ -1,3 +1,4 @@
+server.port: 8081
 spring:
   application:
     name: product-service
@@ -20,9 +21,10 @@ spring:
       properties:
         commit.interval.ms: 1000
         processing.guarantee: exactly_once_v2
-        num.stream.threads: 12
-        default.key.serde: org.apache.kafka.common.serialization.StringDeserializer
-        default.value.serde: org.springframework.kafka.support.serializer.JsonDeserializer
+        num.stream.threads: 2
+        default.key.serde: org.apache.kafka.common.serialization.Serdes$StringSerde
+        default.value.serde: org.springframework.kafka.support.serializer.JsonSerde
+        spring.json.trusted.packages: "*"
         auto.register.schemas: true
         use.latest.version: true
         sasl.login.refresh.buffer.seconds: 300

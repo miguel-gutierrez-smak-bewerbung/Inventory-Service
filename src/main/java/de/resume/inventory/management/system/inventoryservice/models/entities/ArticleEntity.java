@@ -17,6 +17,11 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 public class ArticleEntity extends BaseEntity {
 
+    @NotBlank(message = "Product ID is mandatory")
+    @Size(max = 36)
+    @Column(name = "product_id")
+    private String productId;
+
     @NotNull(message = "Article number must not be null")
     @NotBlank(message = "Article number is mandatory")
     @Size(max = 255)
