@@ -13,22 +13,10 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>inventory-service</name>
     <description>inventory-service</description>
-    <url/>
-    <licenses>
-        <license/>
-    </licenses>
-    <developers>
-        <developer/>
-    </developers>
-    <scm>
-        <connection/>
-        <developerConnection/>
-        <tag/>
-        <url/>
-    </scm>
     <properties>
         <java.version>21</java.version>
         <mapstruct.version>1.6.2</mapstruct.version>
+        <kotlin-maven-allopen.version>2.0.0</kotlin-maven-allopen.version>
     </properties>
     <dependencies>
         <dependency>
@@ -109,6 +97,17 @@
             <artifactId>spring-restdocs-mockmvc</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.jetbrains.kotlin</groupId>
+            <artifactId>kotlin-stdlib</artifactId>
+            <version>2.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>io.github.microutils</groupId>
+            <artifactId>kotlin-logging-jvm</artifactId>
+            <version>3.0.5</version>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -178,6 +177,45 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                <groupId>org.jetbrains.kotlin</groupId>
+                <artifactId>kotlin-maven-plugin</artifactId>
+                <version>${kotlin-maven-allopen.version}</version>
+                <executions>
+                    <execution>
+                        <id>kotlin-compile</id>
+                        <phase>process-sources</phase>
+                        <goals><goal>compile</goal></goals>
+                        <configuration>
+                            <jvmTarget>21</jvmTarget>
+                            <args>
+                                <arg>-Xjsr305=strict</arg>
+                            </args>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>kotlin-test-compile</id>
+                        <phase>test-compile</phase>
+                        <goals><goal>test-compile</goal></goals>
+                        <configuration>
+                            <jvmTarget>21</jvmTarget>
+                        </configuration>
+                    </execution>
+                </executions>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.jetbrains.kotlin</groupId>
+                        <artifactId>kotlin-maven-allopen</artifactId>
+                        <version>${kotlin-maven-allopen.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.jetbrains.kotlin</groupId>
+                        <artifactId>kotlin-maven-noarg</artifactId>
+                        <version>${kotlin-maven-allopen.version}</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+
         </plugins>
     </build>
 

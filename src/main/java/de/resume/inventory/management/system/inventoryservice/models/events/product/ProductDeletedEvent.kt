@@ -1,23 +1,22 @@
-package de.resume.inventory.management.system.inventoryservice.models.events.product;
+package de.resume.inventory.management.system.inventoryservice.models.events.product
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import de.resume.inventory.management.system.inventoryservice.models.enums.ProductAction;
+import com.fasterxml.jackson.annotation.JsonFormat
+import com.fasterxml.jackson.annotation.JsonProperty
+import de.resume.inventory.management.system.inventoryservice.models.enums.ProductAction
+import java.time.LocalDateTime
 
-import java.time.LocalDateTime;
+class ProductDeletedEvent(
+    id: String,
+    productAction: ProductAction,
 
-public record ProductDeletedEvent(
+    @field:JsonProperty("timestamp")
+    @field:JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
+    val timestamp: LocalDateTime,
 
-        @JsonProperty("id")
-        String id,
+    @field:JsonProperty("tenantId")
+    val tenantId: String
+) : ProductEvent(id, productAction) {
 
-        @JsonProperty("timestamp")
-        @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
-        LocalDateTime timestamp,
 
-        @JsonProperty("productAction")
-        ProductAction productAction,
+}
 
-        @JsonProperty("tenantId")
-        String tenantId
-) { }

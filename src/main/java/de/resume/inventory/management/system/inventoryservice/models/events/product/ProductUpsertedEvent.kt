@@ -1,41 +1,37 @@
-package de.resume.inventory.management.system.inventoryservice.models.events.product;
+package de.resume.inventory.management.system.inventoryservice.models.events.product
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import de.resume.inventory.management.system.inventoryservice.models.enums.ProductAction;
+import com.fasterxml.jackson.annotation.JsonFormat
+import com.fasterxml.jackson.annotation.JsonProperty
+import de.resume.inventory.management.system.inventoryservice.models.enums.ProductAction
+import java.time.LocalDateTime
 
-import java.time.LocalDateTime;
+class ProductUpsertedEvent(
 
-public record ProductUpsertedEvent(
+    id: String,
+    productAction: ProductAction,
 
-        @JsonProperty("id")
-        String id,
+    @field:JsonProperty("name")
+    val name: String,
 
-        @JsonProperty("name")
-        String name,
+    @field:JsonProperty("articleNumber")
+    val articleNumber: String,
 
-        @JsonProperty("articleNumber")
-        String articleNumber,
+    @field:JsonProperty("category")
+    val category: String,
 
-        @JsonProperty("category")
-        String category,
+    @field:JsonProperty("unit")
+    val unit: String,
 
-        @JsonProperty("unit")
-        String unit,
+    @field:JsonProperty("price")
+    val price: Double,
 
-        @JsonProperty("price")
-        double price,
+    @field:JsonProperty("description")
+    val description: String,
 
-        @JsonProperty("description")
-        String description,
+    @field:JsonProperty("timestamp")
+    @field:JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
+    val timestamp: LocalDateTime,
 
-        @JsonProperty("timestamp")
-        @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
-        LocalDateTime timestamp,
-
-        @JsonProperty("productAction")
-        ProductAction productAction,
-
-        @JsonProperty("tenantId")
-        String tenantId
-) { }
+    @field:JsonProperty("tenantId")
+    val tenantId: String
+) : ProductEvent(id, productAction)
