@@ -5,6 +5,7 @@ import de.resume.inventory.management.system.inventoryservice.services.article.A
 import mu.KotlinLogging
 import org.apache.kafka.clients.consumer.ConsumerRecord
 import org.springframework.kafka.annotation.KafkaListener
+import org.springframework.kafka.support.Acknowledgment
 import org.springframework.stereotype.Service
 
 @Service
@@ -19,8 +20,15 @@ class ProductSnapshotListener(
         topics = ["#{@articleTopicConfig.productsSnapshot}"],
         groupId= "\${spring.kafka.consumer.group-id}"
     )
-    fun onConsume(record: ConsumerRecord<String, String>) {
+    fun onConsume(record: ConsumerRecord<String, String?>, acknowledgment: Acknowledgment) {
         log.info("[ProductSnapshotListener] start consuming message: ${record.value()} and kafkaKey ${record.key()}")
-        articleService.consume(record)
+        //todo is already processed
+        record.value()?.let {
+            articleService.consume(record.key(),it)
+
+            return
+        }
+        log.info("tombstone message for key ${record.key()}")
+        acknowledgment.acknowledge()
     }
 }

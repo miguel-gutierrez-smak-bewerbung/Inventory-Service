@@ -107,7 +107,10 @@
             <artifactId>kotlin-logging-jvm</artifactId>
             <version>3.0.5</version>
         </dependency>
-
+        <dependency>
+            <groupId>com.fasterxml.jackson.module</groupId>
+            <artifactId>jackson-module-kotlin</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
